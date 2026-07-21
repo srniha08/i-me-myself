@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadia Rahman Niha | SRN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg: #F8F5F0;
+            --text: #2E2E2E;
+            --accent: #7A8B6F;
+            --gray: #D9D4CC;
+            --beige: #E8E1D6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .sans {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        /* Cursor */
+        .cursor {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            display: none;
+        }
+
+        .cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+
+            .cursor,
+            .cursor-dot {
+                display: block;
+            }
+        }
+
+        /* Ripple */
+        .ripple {
+            position: fixed;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            animation: rippleAnim 0.8s forwards;
+        }
+
+        @keyframes rippleAnim {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(248, 245, 240, 0.92);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            font-size: 1.9rem;
+            letter-spacing: 4px;
+            font-weight: 300;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 19px;
+            margin-left: 2.5rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -6px;
+            left: 0;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            border-top: none;
+        }
+
+        .hero h1 {
+            font-size: 82px;
+            line-height: 1.05;
+            font-weight: 300;
+        }
+
+        .hero .subtitle {
+            font-size: 28px;
+            color: var(--accent);
+            margin: 1rem 0 1.5rem;
+        }
+
+        .hero p {
+            font-size: 22px;
+            max-width: 520px;
+        }
+
+        /* Assalamualaikum Typewriter Greeting */
+        .greeting-container {
+            height: 40px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .greeting-text {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 25px;
+            font-weight: 500;
+            color: var(--accent);
+            border-right: 2px solid var(--accent);
+            white-space: nowrap;
+            padding-right: 5px;
+            animation: blinkCursor 0.7s infinite;
+        }
+
+        @keyframes blinkCursor {
+
+            0%,
+            50% {
+                border-color: var(--accent);
+            }
+
+            51%,
+            100% {
+                border-color: transparent;
+            }
+        }
+
+        .fade-out {
+            animation: fadeOut 1s forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+
+        .hero-logo {
+            width: 440px;
+            height: 440px;
+            background: url('images/SadiaRahmanNiha.png') center/contain no-repeat;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-logo:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.22);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 10rem 5%;
+            border-top: 1px solid var(--gray);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .section-divider {
+            width: 120px;
+            height: 2px;
+            background: var(--accent);
+            margin: 0 auto 3rem;
+        }
+
+        .section-header {
+            font-size: 58px;
+            text-align: center;
+            margin-bottom: 5rem;
+            font-weight: 300;
+        }
+
+        /* Timeline */
+        .timeline {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gray);
+        }
+
+        .timeline-item {
+            margin-bottom: 4rem;
+            position: relative;
+            padding-left: 100px;
+            font-size: 22px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 42px;
+            width: 18px;
+            height: 18px;
+            background: var(--bg);
+            border: 4px solid var(--accent);
+            border-radius: 50%;
+        }
+
+        /* Grid Sections */
+        .grid-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .category h3 {
+            font-size: 28px;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .category ul {
+            list-style: none;
+            font-size: 21px;
+        }
+
+        .category li {
+            margin: 10px 0;
+        }
+
+        /* Project Cards */
+        .project {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+            margin-bottom: 10rem;
+            align-items: center;
+        }
+
+        .project:nth-child(even) {
+            direction: rtl;
+        }
+
+        .project-content {
+            direction: ltr;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 520px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 18px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+            transition: transform 0.7s ease, box-shadow 0.7s ease, filter 0.7s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.08), transparent 45%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .project:hover .project-image {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.22);
+            filter: brightness(1.04);
+        }
+
+        .project:hover .project-image::after {
+            opacity: 1;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-form textarea {
+            grid-column: 1 / -1;
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1.2rem 1.4rem;
+            border: 2px solid var(--gray);
+            border-radius: 14px;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(122, 139, 111, 0.15);
+        }
+
+        .contact-form button {
+            grid-column: 1 / -1;
+            padding: 1.2rem;
+            border: none;
+            border-radius: 14px;
+            background: var(--accent);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 1.1rem 2.8rem;
+            border: 2px solid var(--text);
+            background: transparent;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 19px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem;
+            font-size: 17px;
+            border-top: 1px solid var(--gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 52px;
+            }
+
+            .hero .subtitle {
+                font-size: 22px;
+            }
+
+            .project {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                font-size: 42px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">SRN.</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#strengths">Strengths</a>
+            <a href="#projects">Work</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div
+            style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center;">
+            <div>
+                <div class="greeting-container">
+                    <span id="greeting" class="greeting-text"></span>
+                </div>
+
+                <h1>SADIA RAHMAN NIHA</h1>
+                <div class="subtitle">FRONT-END DEVELOPER • UI DESIGNER • CSE STUDENT</div>
+                <p>“Crafting digital experiences with the precision of an engineer and the eye of a designer.”</p>
+                <div style="margin-top: 3rem;">
+                    <a href="#projects" class="btn">View My Work</a>
+                    <a href="#" onclick="downloadResume()" class="btn"
+                        style="background:var(--accent); color:white; margin-left:1rem;">Download Resume</a>
+                </div>
+            </div>
+            <div class="hero-logo"></div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" style="background: var(--beige);">
+        <div class="section-divider"></div>
+        <h2 class="section-header">About Me</h2>
+        <div
+            style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.3fr; gap: 8rem; font-size: 22px;">
+            <div>
+                <p>A BSc in CSE student, currently in my 4th Year Final Semester. I have a strong interest in web
+                    development and enjoy building clean, responsive, and user-friendly digital experiences.</p>
+            </div>
+            <div class="sans" style="font-size: 22px;">
+                <p><i class="fas fa-map-marker-alt"></i> Narayanganj, Bangladesh</p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:srniha08@gmail.com">srniha08@gmail.com</a></p>
+                <p><i class="fas fa-phone"></i> +8801581514993</p>
+                <p><i class="fab fa-github"></i> <a href="https://github.com/srniha08"
+                        target="_blank">github.com/srniha08</a></p>
+                <p><i class="fab fa-facebook"></i> <a href="https://www.facebook.com/share/1Bhz3F6mY4/"
+                        target="_blank">Facebook</a></p>
+                <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/sadia-rahman-niha-066899352"
+                        target="_blank">LinkedIn</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" style="background: var(--bg);">
+        <div class="section-divider"></div>
+        <h2 class="section-header">Education</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h3>R. P. Shaha University</h3>
+                <p>B.Sc. in Computer Science and Engineering</p>
+                <p><a href="https://rpsu.ac.bd/" target="_blank">rpsu.ac.bd</a> • 2023 – 2026 (Expected) • CGPA: 3.00 /
+                    4.00</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h3>Narayanganj Govt Mohila College</h3>
+                <p>HSC (Science Group)</p>
+                <p><a href="https://www.ngmc.gov.bd/" target="_blank">ngmc.gov.bd</a> • GPA: 5.00 / 5.00 • 2021</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h3>Narayanganj Preparatory School</h3>
+                <p>SSC (Science Group)</p>
+                <p><a href="https://www.facebook.com/p/Narayanganj-Preparatory-School-100040158711740/"
+                        target="_blank">Facebook</a> • GPA: 5.00 / 5.00 • 2019</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" style="background: var(--beige);">
+        <div class="section-divider"></div>
+        <h2 class="section-header">Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h3>Leotech — Technical Intern</h3>
+                <p>Current</p>
+                <p>Gaining practical industry experience in web development and technology solutions.</p>
+                <a href="https://www.leotechbd.com/includes/home.php" target="_blank" style="color:var(--accent);">Visit
+                    Leotech →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Skills -->
+    <section id="skills" style="background: var(--bg);">
+        <div class="section-divider"></div>
+        <h2 class="section-header">Technical Skills</h2>
+        <div class="grid-section">
+            <div class="category">
+                <h3><i class="fas fa-code"></i> Web &amp; UI</h3>
+                <ul>
+                    <li>HTML5</li>
+                    <li>CSS3</li>
+                    <li>JavaScript</li>
+                    <li>Responsive Web Design</li>
+                    <li>UI Design</li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3><i class="fas fa-database"></i> Programming &amp; Database</h3>
+                <ul>
+                    <li>C</li>
+                    <li>C++</li>
+                    <li>Java</li>
+                    <li>MySQL</li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3><i class="fas fa-tools"></i> Tools &amp; IDEs</h3>
+                <ul>
+                    <li>Visual Studio Code</li>
+                    <li>Code::Blocks</li>
+                    <li>GitHub</li>
+                    <li>LaTeX</li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3><i class="fas fa-language"></i> Languages</h3>
+                <ul>
+                    <li>Bengali (Native)</li>
+                    <li>English (Professional Working Proficiency)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strengths -->
+    <section id="strengths" style="background: var(--beige);">
+        <div class="section-divider"></div>
+        <h2 class="section-header">Strengths &amp; Interests</h2>
+        <div class="grid-section">
+            <div class="category">
+                <h3><i class="fas fa-star"></i> Key Strengths</h3>
+                <ul>
+                    <li>Strong analytical and UI problem-solving abilities</li>
+                    <li>Detail-oriented design approach</li>
+                    <li>Quick learner</li>
+                    <li>Adaptable team player</li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3><i class="fas fa-heart"></i> Areas of Interest</h3>
+                <ul>
+                    <li>Front-End Web Development</li>
+                    <li>Full-Stack Web Development</li>
+                    <li>User Interface (UI) Design</li>
+                    <li>Software Engineering</li>
+                    <li>International Travel</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" style="background: var(--bg);">
+        <div class="section-divider"></div>
+        <h2 class="section-header">Selected Work</h2>
+
+        <div class="project">
+            <div class="project-image" style="background-image: url('images/KacchiKhacchi.png')"></div>
+            <div class="project-content">
+                <h3>KacchiKhacchi</h3>
+                <p>A dedicated Kacchi selling website based in Narayanganj. Fully responsive food-ordering platform.</p>
+                <a href="https://github.com/srniha08/Kacchi_khacchi" target="_blank" class="btn">← View on GitHub</a>
+            </div>
+        </div>
+
+        <div class="project">
+            <div class="project-image" style="background-image: url('images/DopamineJar.png')"></div>
+            <div class="project-content">
+                <h3>DopamineJar</h3>
+                <p>A fun to-do list application with rewarding animations.</p>
+                <a href="https://github.com/srniha08/the_dopamine_jar" target="_blank" class="btn">View on GitHub →</a>
+            </div>
+        </div>
+
+        <div class="project">
+            <div class="project-image" style="background-image: url('images/BookManagement.png')"></div>
+            <div class="project-content">
+                <h3>BookManagement</h3>
+                <p>Dynamic Book Management System with CRUD operations.</p>
+                <a href="https://github.com/srniha08/book-management-system" target="_blank" class="btn">← View on
+                    GitHub</a>
+            </div>
+        </div>
+
+        <div class="project">
+            <div class="project-image" style="background-image: url('images/Clima.png')"></div>
+            <div class="project-content">
+                <h3>Clima</h3>
+                <p>Sleek weather web application with live forecast.</p>
+                <a href="https://github.com/srniha08/Clima-the-weather-webapp" target="_blank" class="btn">View on
+                    GitHub →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="background: var(--beige);">
+        <div class="section-divider"></div>
+        <h2 class="section-header">Let's Connect</h2>
+        <div style="max-width: 700px; margin: 0 auto;">
+            <form class="contact-form" id="contactForm">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea rows="6" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 Sadia Rahman Niha. Designed with Passion.
+    </footer>
+
+    <script>
+
+        // Assalamualaikum Typewriter Effect
+        const greeting = document.getElementById('greeting');
+        const greetingText = "Assalamualaikum";
+        let greetingIndex = 0;
+
+        function typeGreeting() {
+            if (greetingIndex < greetingText.length) {
+                greeting.textContent += greetingText.charAt(greetingIndex);
+                greetingIndex++;
+                setTimeout(typeGreeting, 120);
+            } else {
+                // Stay visible for 3 seconds, then fade out
+                setTimeout(() => {
+                    greeting.classList.add('fade-out');
+                }, 3000);
+            }
+        }
+
+        // Start typing when page loads
+        window.addEventListener('load', typeGreeting);
+        // Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.transform = `translate(${e.clientX - 15}px, ${e.clientY - 15}px)`;
+            cursorDot.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
+        });
+
+        // Click Ripple
+        document.addEventListener('click', (e) => {
+            const ripple = document.createElement('div');
+            ripple.classList.add('ripple');
+            ripple.style.left = `${e.clientX - 10}px`;
+            ripple.style.top = `${e.clientY - 10}px`;
+            ripple.style.width = '20px';
+            ripple.style.height = '20px';
+            document.body.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 800);
+        });
+
+        // Scroll Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+
+        function downloadResume() {
+            alert("✅ Resume download started!");
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert("✅ Thank you! Your message has been received.");
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>
