@@ -392,24 +392,32 @@
             transform: translateY(-8px) scale(1.02);
         }
 
-        /* Contact */
-        .contact-form {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
+        /* Contact Section */
+        .contact-wrapper {
+            max-width: 750px;
+            margin: 0 auto;
+            background: var(--bg);
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
         }
 
-        .contact-form textarea {
-            grid-column: 1 / -1;
-            min-height: 180px;
-            resize: vertical;
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
         }
 
         .contact-form input,
         .contact-form textarea {
             width: 100%;
-            padding: 1rem;
+            padding: 1.2rem 1.4rem;
             border: 2px solid var(--gray);
             border-radius: 14px;
             background: var(--bg);
@@ -417,22 +425,52 @@
             font-family: 'Inter', system-ui, sans-serif;
             font-size: 1rem;
             outline: none;
+            transition: all 0.3s ease;
         }
 
         .contact-form input:focus,
         .contact-form textarea:focus {
             border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(122, 139, 111, 0.15);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 180px;
         }
 
         .contact-form button {
-            grid-column: 1 / -1;
-            padding: 1rem;
+            width: 100%;
+            padding: 1.2rem;
             border: none;
             border-radius: 14px;
             background: var(--accent);
             color: white;
-            font-size: 1rem;
+            font-size: 1.05rem;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(122, 139, 111, 0.3);
+        }
+
+        .contact-form button i {
+            margin-right: 0.5rem;
+        }
+
+        /* Contact (Mobile Responsive) */
+        @media (max-width: 768px) {
+            .contact-wrapper {
+                padding: 2rem;
+                margin: 0 1rem;
+            }
+
+            .input-group {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Buttons */
@@ -523,6 +561,82 @@
             .section-header {
                 font-size: 2rem;
             }
+        }
+
+        /* ===== Premium Section Separation ===== */
+
+        /* General section spacing */
+        section {
+            padding: 7rem 5%;
+            position: relative;
+        }
+
+        /* Experience Section */
+        #experience {
+            background: var(--beige);
+            border-top: 1px solid var(--gray);
+            border-bottom: 1px solid var(--gray);
+        }
+
+        /* Technical Skills Section */
+        #skills {
+            background: var(--bg);
+            border-top: 1px solid var(--gray);
+            border-bottom: 1px solid var(--gray);
+        }
+
+        /* Selected Work Section */
+        #projects {
+            background: var(--beige);
+            border-top: 1px solid var(--gray);
+            border-bottom: 1px solid var(--gray);
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--bg);
+            border-top: 1px solid var(--gray);
+            border-bottom: 1px solid var(--gray);
+        }
+
+        /* Premium cards for skills */
+        #skills .category {
+            background: white;
+            padding: 2rem;
+            border-radius: 22px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #skills .category:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Section headers */
+        .section-header {
+            margin-bottom: 4rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Footer styling */
+        footer {
+            background: var(--beige);
+            text-align: center;
+            padding: 3rem 1rem;
+            border-top: 1px solid var(--gray);
+        }
+
+        .footer-text {
+            font-size: 1rem;
+            color: var(--text);
+            letter-spacing: 0.5px;
+        }
+
+        .footer-text span {
+            color: var(--accent);
+            font-weight: 600;
         }
     </style>
 </head>
@@ -657,7 +771,7 @@
     </section>
 
     <!-- Skills -->
-    <section id="skills">
+    <section id="skills" style="background: var(--bg);">
         <div class="section-divider"></div>
         <h2 class="section-header">Technical Skills</h2>
 
@@ -704,10 +818,9 @@
     </section>
 
     <!-- Projects -->
-    <section id="projects" style="background: var(--bg);">
+    <section id="projects" style="background: var(--beige); padding-top: 8rem;">
         <div class="section-divider"></div>
         <h2 class="section-header">Selected Work</h2>
-
         <!-- Project 1 -->
         <div class="project">
             <div class="project-image" style="background-image: url('images/KacchiKhacchi.png')"></div>
@@ -758,17 +871,31 @@
     </section>
 
     <!-- Contact -->
-    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xrenlklb" method="POST">
+    <section id="contact" style="background: var(--bg);">
+        <div class="section-divider"></div>
+        <h2 class="section-header">Let's Connect</h2>
 
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+        <div class="contact-wrapper">
+            <form class="contact-form" action="https://formspree.io/f/xrenlklb" method="POST">
 
-        <button type="submit">Send Message</button>
-    </form>
+                <div class="input-group">
+                    <input type="text" name="name" placeholder="Your Name" required />
+                    <input type="email" name="email" placeholder="Your Email" required />
+                </div>
+
+                <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+
+                <button type="submit">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+    </section>
 
     <footer>
-        &copy; 2026 Sadia Rahman Niha. Designed with Passion.
+        <p class="footer-text">
+            © 2026 <span>Sadia Rahman Niha</span> • Crafted with elegance & passion.
+        </p>
     </footer>
 
     <script>
