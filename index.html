@@ -654,6 +654,33 @@
             color: var(--accent);
             font-weight: 600;
         }
+        /* Separate Contact and Footer */
+#contact {
+    padding-bottom: 7rem;
+    border-bottom: 1px solid var(--gray);
+}
+
+.footer {
+    background: var(--accent);
+    padding: 2.5rem 1rem;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-text {
+    color: #F8F5F0;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.footer-text span {
+    font-weight: 700;
+    color: #FFFFFF;
+}
     </style>
 </head>
 
@@ -671,6 +698,7 @@
             <a href="#education">Education</a>
             <a href="#experience">Experience</a>
             <a href="#skills">Skills</a>
+            <a href="#strengths">Strengths & Interests</a>
             <a href="#projects">Work</a>
             <a href="#contact">Contact</a>
         </div>
@@ -863,7 +891,7 @@
     </section>
 
     <!-- Projects -->
-    <section id="projects" style="background: var(--beige); padding-top: 8rem;">
+    <section id="projects" style="background: var(--bg); padding-top: 8rem;">
         <div class="section-divider"></div>
         <h2 class="section-header">Selected Work</h2>
         <!-- Project 1 -->
@@ -916,7 +944,7 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact" style="background: var(--bg);">
+    <section id="contact" style="background: var(--beige);">
         <div class="section-divider"></div>
         <h2 class="section-header">Let's Connect</h2>
 
@@ -937,11 +965,13 @@
         </div>
     </section>
 
-    <footer>
+ <footer class="footer">
+    <div class="footer-content">
         <p class="footer-text">
             © 2026 <span>Sadia Rahman Niha</span> • Crafted with elegance & passion.
         </p>
-    </footer>
+    </div>
+</footer>
 
     <script>
         // Typewriter greeting
