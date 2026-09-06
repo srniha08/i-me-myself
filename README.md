@@ -1,5 +1,5 @@
 # i-me-myself
-Juts about me &lt;3
+Just about me &lt;3
 
 A minimal, elegant, and fully responsive portfolio website showcasing my journey as a CSE student, front-end developer, and UI design enthusiast.
 
